@@ -31,7 +31,7 @@ def load_localization(lang="de"):
 
 def load_api_key():
     """Load OpenAI API key from streamlit"""
-    api_key = st.secrets.get("openai_api_key")
+    api_key = st.secrets.get("openai-api-key")
     return api_key if api_key else ''
 
 
