@@ -1,6 +1,6 @@
 **/.DS_Store
 **/__pycache__/
 .venv/
-api-key.json
+.streamlit/secrets.toml
 quantitative-evaluation/
 prompt-engineering/

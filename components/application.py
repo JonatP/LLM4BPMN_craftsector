@@ -30,13 +30,9 @@ def load_localization(lang="de"):
 
 
 def load_api_key():
-    """Load OpenAI API key from api-key.json file"""
-
-    with open('api-key.json', 'r', encoding='utf-8') as f:
-        data = json.load(f)
-        # Versuche verschiedene mögliche Schlüssel
-        api_key = data.get('openai') or data.get('openai_api_key') or data.get('api_key')
-        return api_key if api_key else ''
+    """Load OpenAI API key from streamlit"""
+    api_key = st.secrets.get("openai_api_key")
+    return api_key if api_key else ''
 
 
 def run_app():
