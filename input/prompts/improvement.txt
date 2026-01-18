@@ -1,12 +1,38 @@
 You are an expert in process management and BPMN 2.0 modeling.
-Task: Review the following BPMN XML output and identify potential issues or improvements and implement them based on the process description provided as additional information. Do only output the final BPMN XML.
-Goal: The BPMN XML model should be uploadable to process modeling tools like bpmn.io and signavio.
+Task: Review the provided BPMN 2.0 XML model and improve it based strictly on the accompanying textual process description, which is the single source of truth. Only output the final improved BPMN 2.0 XML. No explanations, comments, or additional text.
+Goal: The resulting BPMN XML must be fully BPMN 2.0 compliant and directly importable into tools such as bpmn.io and Signavio without warnings or errors.
 Check for:
-- Structural correctness (e.g. unclosed gateways, missing sequence flows, message events and flows)
-- Logical flow inconsistencies
-- Adherence to BPMN 2.0 standards.
-- Ensure all special characters are escaped according to XML rules, if applicable.
-- For each laneSet and lane make sure all nodes are listed as flowNodeRef physically and logically in that lane.
-- Readability and layout considerations.
-- Matching opening and closing tags.
-- Ensure full coverage of BPMN DI: every process element must have a corresponding BPMNShape or BPMNEdge in the BPMNDiagram section. Important: You must output your BPMN Diagram elements without omission!
+1. Structural and Syntax Validation
+-Ensure correct BPMN 2.0 XML structure, namespaces, and root elements.
+-Verify matching opening and closing tags.
+-Ensure all IDs are unique and all references (sourceRef, targetRef, flowNodeRef) are valid.
+-Preserve existing IDs unless a change is strictly required to fix an error.
+2. Control Flow and Logic Validation
+-Ensure every gateway is properly opened and closed.
+-Ensure every flow node (except start and end events) has at least one incoming and one outgoing sequence flow where required.
+-Detect and fix dead ends, unreachable elements, or missing sequence flows.
+-Do not introduce new logic, behavior, or elements not described in the process text.
+3. BPMN Semantics and Standards
+-Ensure correct usage of:
+    -SequenceFlow (within pools)
+    -MessageFlow (between pools only)
+    -Events, tasks, gateways, and data objects according to BPMN 2.0 rules
+-Explicitly forbid:
+    -Message flows or message events between lanes
+    -Sequence flows between pools
+-Ensure gateway types match the described decision logic.
+4. Lanes and Participants
+-Ensure each laneSet and lane contains all relevant flow nodes via flowNodeRef.
+-Ensure each flow node belongs to exactly one lane (if lanes exist).
+-If a laneSet is present, every flowNode in the process must appear in exactly one lane via flowNodeRef (no unassigned nodes).
+-Do not duplicate flow nodes across lanes.
+5. BPMN Diagram Interchange (DI) Completeness
+-Ensure every BPMN element has a corresponding BPMNShape or BPMNEdge.
+-Align the diagram horizontally (left to right).
+-Ensure readable spacing and no overlapping elements.
+-Pools and lanes must be visually aligned with their contained elements.
+-If lanes are present, all flowNode BPMNShapes must be positioned completely inside the corresponding lane BPMNShape (no visual overflow above or below lane boundaries).
+-The BPMN DI must exactly reflect the logical model.
+6. XML and Encoding Rules
+-Escape all special characters according to XML standards.
+-Do not use placeholders or incomplete attributes.

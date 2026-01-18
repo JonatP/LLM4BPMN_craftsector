@@ -1,6 +1,6 @@
 # BPMN-generation
 
-This application can be accessed via https://bpmn-generation.streamlit.app/.<br>
+This application can be accessed via .<br>
 It can be run locally by running streamlit run app.py.<br>
 <br>
 

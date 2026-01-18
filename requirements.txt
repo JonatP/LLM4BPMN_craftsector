@@ -1,3 +1,9 @@
 streamlit
 openai
 requests
+
+networkx
+openpyxl
+xlsxwriter
+
+psycopg[binary]>=3.1

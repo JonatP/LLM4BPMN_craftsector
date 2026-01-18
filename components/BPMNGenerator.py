@@ -48,10 +48,10 @@ class BPMNGenerator:
         with open(process_2_file_path) as file:
             bpmn_2 = file.read()
 
-        prompt = cot_prompt + "\nExample 1\nText: " + text_1 + "\nBPMN: " + bpmn_1 + "\nExample2:\nText: " + text_2 + "\nBPMN: " + bpmn_2 + "\n\nTask Text: " + self.text
+        prompt = cot_prompt #+ "\nExample 1\nText: " + text_1 + "\nBPMN: " + bpmn_1 + "\nExample2:\nText: " + text_2 + "\nBPMN: " + bpmn_2 + "\n\nTask Text: " + self.text
 
         response = client.chat.completions.create(
-            model="o1",
+            model="gpt-5.2",
             messages=[
                 {
                     "role": "user",
@@ -75,7 +75,7 @@ class BPMNGenerator:
         prompt = improvement_prompt + "\n\nBPMN XML: " + self.bpmn + "\n\nTextual Process Description: " + self.text
 
         response_improved = client.chat.completions.create(
-            model="o1",
+            model="gpt-5.2",
             messages=[
                 {
                     "role": "user",

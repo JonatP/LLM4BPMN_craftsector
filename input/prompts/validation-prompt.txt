@@ -1,0 +1,28 @@
+Bewerte die folgende Antwort, ob sie die Frage genügend beantwortet um für die BPMN-Modellierung genügend Informationen zu haben. Antworte NUR mit validem JSON.
+
+FRAGE:
+{question}
+
+ANTWORT DES NUTZERS:
+{answer}
+
+Antworte EXAKT in diesem JSON-Format (keine zusätzlichen Zeichen):
+
+{{
+  "overall_quality": "gut|mittel|schlecht",
+  "ready_for_bpmn": true|false,
+  "feedback": {{
+    "status": "gut|verbesserung_nötig",
+    "feedback": "Kurze, konkrete Bewertung zur Antwort",
+    "suggestions": "Konkreter Verbesserungsvorschlag"
+  }},
+  "general_feedback": "Kurze zusammenfassende Rückmeldung"
+}}
+
+Beurteile konstruktiv und bleibe höflich. Konzentriere dich ausschließlich auf die gegebene Frage und Antwort und halte dich kurz. Verwende keine zusätzlichen Felder.
+
+Status-Werte: "gut", "verbesserung_nötig"
+overall_quality: "gut", "mittel", "schlecht"
+ready_for_bpmn: true oder false
+
+Antworte ausschließlich mit dem JSON-Objekt ohne erläuternden Text.

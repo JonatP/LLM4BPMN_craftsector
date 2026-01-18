@@ -1,25 +1,52 @@
-You are an expert in process management and BPMN 2.0 modeling.
-Task: Convert the following textual process description into a fully compliant BPMN 2.0 XML model by reasoning step by step. The final BPMN model should adhere strictly to the BPMN 2.0 standard. Do only output the final BPMN XML.
-Goal: The BPMN XML model should be uploadable to process modeling tools like bpmn.io and signavio.
+You are an expert in process management, BPMN 2.0 semantics, and BPMN Diagram Interchange (DI).
+Task: Convert the following textual process description into a fully compliant BPMN 2.0 XML model by reasoning step by step internally. The final BPMN model should adhere strictly to the BPMN 2.0 standard. Do only output the final BPMN XML.
+Goal: The resulting BPMN XML must be:
+- Fully compliant with the BPMN 2.0 specification
+- Uploadable and correctly renderable in tools such as bpmn.io and Signavio
+- Semantically correct, logically ordered, and visually readable
 Step 1: Process Element Extraction
 - Identify all tasks, events, gateways, and data objects in the text
 Step 2: Participant Extraction
-- Identify all participants in the text as candidates for pools and lanes, if applicable.
-- Map the extracted elements of the previous step to the participant that they are executed by, if applicable.
+- Identify all participants as candidates for pools.
+- Identify roles, departments, or responsibilities as lanes within a pool, if applicable.
+- Assign every process element to exactly one pool and, if applicable, exactly one lane.
 Step 3: Define Process Flow
-- Use the identified elements, their lanes, and extract the correct flow in the text to construct a valid BPMN 2.0 XML representation.
-- Ensure correct syntax, structure, and do not use any placeholders.
+- Construct the process flow strictly according to the logical and temporal order described in the text.
+- Ensure that: Every diverging gateway has a corresponding converging gateway of the same type
+- Label all outgoing sequence flows from diverging gateways with meaningful, human-readable conditions.
+- Avoid unnecessary gateways or artificial control flow.
+- The resulting process must make business sense when read from left to right.
 Step 4: BPMN XML Construction
-- Create a valid BPMN 2.0 XML representation from the identified elements, participants, and flow.
-- Every opened gateway (e.g., exclusive gateway) must be properly closed with a corresponding gateway before proceeding.
-- Label the outgoing sequence flows from diverging gateways with text that reflects the condition or choice represented by that branch.
-- For each laneSet and lane make sure all nodes are listed as flowNodeRef physically and logically in that lane, if applicable.
-- Include data objects and data stores where applicable.
-- If there is communication between two pools, make sure to use the correct throwing and catching message events, and messageFlow.
-- Ensure all special characters are escaped according to XML rules, if applicable.
-- Ensure correct and complete BPMN XML syntax without placeholders.
+- roduce a syntactically and semantically valid BPMN 2.0 XML model.
+- se correct BPMN elements and attributes only.
+- Do not use placeholders or incomplete definitions.
+- If a laneSet exists:
+    - Every flowNode must appear in exactly one lane via flowNodeRef
+    - No flowNode may exist outside of lanes
+    - No flowNode may appear in multiple lanes
+- If communication between pools exists:
+    - Use message throw and catch events
+    - Use messageFlow between pools only
+- Never use messageFlow or message events between lanes.
+- Escape all special characters according to XML rules.
 Step 5: Complete the BPMN DI (Diagram Interchange) part
-- The diagram should be aligned horizontally: start events on the left, flow from left to right, and end events on the right.
-- Assign coordinates and dimensions so that the diagram is readable, aligned horizontally, and free of overlapping elements.
-- Make sure the diagram is complete, meaning every element and edge is included. Do not omit anything.
-- Include the diagram in the BPMN XML file.
+- The diagram must be laid out horizontally:
+    - Start events on the far left
+    - End events on the far right
+    - Flow direction strictly left to right
+- Assign explicit coordinates and dimensions to all BPMNShapes and BPMNEdges.
+- Ensure high diagram readability:
+    - SequenceFlows and MessageFlows must NOT visually overlap or cross over activities, events, or gateways
+    - Route edges with bendpoints if necessary to avoid overlaps
+    - Avoid edge crossings where reasonably possible
+- If lanes are present:
+    - All flowNode shapes must be completely inside their lane’s visual bounds
+    - No shape may overflow above or below its lane
+- Compute lane and pool bounds dynamically:
+    - Lane and pool BPMNShapes must fully contain all assigned flowNodes
+    - Include sufficient padding on all sides
+    - Extend bounds to the rightmost and bottommost contained elements
+- Ensure that:
+    - Every BPMN element has a corresponding BPMNShape or BPMNEdge
+    - No diagram elements are missing
+    - No overlapping shapes occur

@@ -1,0 +1,144 @@
+{
+  "app": {
+    "title": "BPMN Generator",
+    "subtitle": "Transformieren Sie Ihre Geschäftsprozesse in professionelle BPMN-Diagramme",
+    "configuration": "Konfiguration",
+    "process_description": "Prozessbeschreibung",
+    "output": "Output"
+  },
+  "privacy": {
+    "title": "Datenschutzhinweis",
+    "text": "Diese Anwendung speichert keine Daten dauerhaft. Alle Eingaben (Sprachaufzeichnungen, API-Schlüssel, Anmeldedaten) werden ausschließlich für die Dauer der Sitzung verwendet. Sie werden nicht protokolliert, gespeichert oder an Dritte weitergegeben, mit Ausnahme der relevanten API-Endpunkte: OpenAI und, falls ausgewählt, SAP Signavio. Die Nutzer sind für die Sicherheit ihrer API-Schlüssel und Anmeldedaten verantwortlich. Durch die Nutzung dieser Anwendung erklären Sie sich mit dieser Verarbeitung Ihrer Daten einverstanden."
+  },
+  "api_key": {
+    "label": "OpenAI API Schlüssel",
+    "help": "Ihren API-Schlüssel finden Sie unter https://platform.openai.com/",
+    "required": "OpenAI API-Schlüssel erforderlich"
+  },
+  "questions": {
+    "title": "Beantworten Sie 5 Fragen zu Ihrem Geschäftsprozess:",
+    "start_button": "Fragen starten",
+    "restart_button": "Erneut ausfüllen",
+    "complete_message": "Prozessbeschreibung erfasst!",
+    "show_answers": "Antworten anzeigen",
+    "instruction": "Beantworten Sie zuerst die 5 Fragen, um fortzufahren.",
+    "validate_button": "Antwort validieren",
+    "next_button": "Weiter",
+    "back_button": "Zurück",
+    "cancel_button": "Abbrechen",
+    "summary_button": "Zur Zusammenfassung",
+    "help_text": "Bitte tippen Sie eine Antwort ein",
+    "validating": "Antwort wird validiert...",
+    "label": "Ihre Antwort (Text):",
+    "questions_list": [
+      {
+        "title": "Schritt 1 von 5: Prozessname und Zweck",
+        "question": "Wie heißt Ihr Prozess und was ist sein Hauptzweck?",
+        "placeholder": "z.B. Kundenbestellung bearbeiten - zur Abwicklung eingehender Bestellungen"
+      },
+      {
+        "title": "Schritt 2 von 5: Beteiligte Akteure",
+        "question": "Welche Personen, Abteilungen oder Systeme sind an diesem Prozess beteiligt?",
+        "placeholder": "z.B. Kunde, Vertrieb, Lager, Buchhaltung, ERP-System"
+      },
+      {
+        "title": "Schritt 3 von 5: Eingangsdaten und Auslöser",
+        "question": "Womit beginnt der Prozess? Welche Eingangsdaten werden benötigt?",
+        "placeholder": "z.B. Kundenbestellung per E-Mail, mit Produktnummer und Menge"
+      },
+      {
+        "title": "Schritt 4 von 5: Hauptschritte",
+        "question": "Beschreiben Sie die wichtigsten Schritte des Prozesses in chronologischer Reihenfolge:",
+        "placeholder": "z.B. 1) Bestellung prüfen, 2) Verfügbarkeit checken, 3) Versand veranlassen..."
+      },
+      {
+        "title": "Schritt 5 von 5: Prozessende und Output",
+        "question": "Was sind die Endergebnisse des Prozesses? Was wird produziert oder erreicht?",
+        "placeholder": "z.B. Versendete Ware, Rechnung an Kunde, Aktualisierter Lagerbestand"
+      }
+    ]
+  },
+  "audio": {
+    "label": "Ihre Antwort (Audio):",
+    "convert_button": "Audio zu Text",
+    "processing": "Audio wird verarbeitet...",
+    "success": "Audio erfolgreich konvertiert!",
+    "processing_error": "Fehler:",
+    "api_key_required": "OpenAI API Key erforderlich"
+  },
+  "generation": {
+    "create_button": "BPMN-Diagramm erstellen",
+    "first_version": "Erste BPMN-Version wird generiert...",
+    "improving": "BPMN-Modell wird verbessert...",
+    "checking": "Vollständigkeit wird geprüft...",
+    "completing": "BPMN-Modell wird vervollständigt...",
+    "success": "BPMN-Diagramm erfolgreich generiert!",
+    "auth_error": "Ihr OpenAI API-Schlüssel ist ungültig!",
+    "processing_error": "Fehler bei der Verarbeitung:",
+    "api_key_required": "OpenAI API-Schlüssel erforderlich"
+  },
+  "export": {
+    "title": "Export-Optionen",
+    "xml_button": "Als XML herunterladen",
+    "mermaid_button": "Als Mermaid anzeigen",
+    "signavio_button": "Nach SAP Signavio exportieren"
+  },
+  "mermaid": {
+    "title": "Mermaid-Diagramm",
+    "close_button": "Schließen",
+    "code_label": "Mermaid Code:",
+    "code_help": "Kopieren Sie diesen Code und fügen Sie ihn in einen Mermaid-Editor ein",
+    "download_button": "Mermaid Code herunterladen",
+    "conversion_error": "Fehler bei Mermaid-Konvertierung:",
+    "creation_error": "Fehler beim Erstellen des Mermaid-Diagramms:"
+  },
+  "signavio": {
+    "title": "SAP Signavio Export-Konfiguration",
+    "credentials": "Geben Sie Ihre SAP Signavio Zugangsdaten ein:",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "instance": "Instanz",
+    "instance_placeholder": "Wählen Sie Ihre SAP Signavio Instanz",
+    "workspace_id": "Workspace ID",
+    "workspace_help": "Finden Sie unter Hilfe → Workspace Informationen",
+    "directory_id": "Zielverzeichnis ID",
+    "directory_help": "32-stelliger Schlüssel aus der URL des Verzeichnisses",
+    "export_button": "Jetzt exportieren",
+    "cancel_button": "Abbrechen",
+    "all_fields_required": "Alle Felder sind erforderlich",
+    "authenticating": "SAP Signavio Authentifizierung...",
+    "exporting": "Prozessmodell wird nach SAP Signavio exportiert...",
+    "success": "Prozessmodell erfolgreich in SAP Signavio exportiert!",
+    "loading_preview": "Vorschaubild wird geladen...",
+    "preview": "Ihr Modell in SAP Signavio",
+    "preview_error": "Vorschaubild konnte nicht geladen werden, aber der Export war erfolgreich.",
+    "export_failed": "Export fehlgeschlagen:",
+    "unexpected_error": "Unerwarteter Fehler:"
+  },
+  "summary": {
+    "title": "Zusammenfassung Ihrer Antworten",
+    "subtitle": "Sie können Ihre Antworten bearbeiten. Die Vorschau aktualisiert sich automatisch",
+    "answers_title": "Ihre Antworten",
+    "answer_label": "Antwort:",
+    "preview_title": "Vorschau",
+    "back_button": "Zurück zu Fragen",
+    "continue_button": "Direkt fortfahren",
+    "cancel_button": "Abbrechen",
+    "saved_message": "Änderung gespeichert",
+    "preview_description": "Prozessbeschreibung basierend auf Benutzerangaben:"
+  },
+  "output": {
+    "placeholder_title": "Hier erscheint Ihr BPMN-Diagramm",
+    "placeholder_text": "Beschreiben Sie Ihren Geschäftsprozess indem sie ein paar Fragen beantworten und klicken Sie auf <strong>BPMN-Diagramm erstellen</strong>.<br><br>Die Erstellung kann bis zu 60 Sekunden dauern."
+  },
+  "feedback": {
+    "improvement_needed": "Verbesserung empfohlen:",
+    "suggestion": "Vorschlag:",
+    "good": "Ihre Antwort ist gut!",
+    "feedback_label": "Feedback:",
+    "validation_failed": "Validierung fehlgeschlagen:"
+  },
+  "footer": {
+    "text": "Entwickelt xxxx von y z an der Uni • <a href=\"mailto:y.z@Uni.de\">Kontakt</a>"
+  }
+}

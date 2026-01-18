@@ -1,0 +1,268 @@
+/* BPMN Generator Application Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Global Styling - Remove top padding */
+.main .block-container {
+    padding-top: 0rem !important;
+    padding-bottom: 2rem;
+    font-family: 'Inter', sans-serif;
+    max-width: 1400px;
+    margin-top: 0 !important;
+}
+
+/* Hide Streamlit default elements */
+.stApp > header { 
+    display: none !important; 
+}
+
+/* Header Styling - Start at top */
+.main-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    margin-top: 1rem;
+    padding-top: 0;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+    margin-top: 0 !important;
+}
+
+.main-subtitle {
+    font-size: 1.1rem;
+    color: #6b7280;
+    font-weight: 400;
+}
+
+/* Card Styling */
+.card-header {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+/* Privacy Notice Styling */
+.privacy-notice {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid #3b82f6;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #475569;
+}
+
+/* Input Styling */
+.stTextInput input, .stTextArea textarea {
+    border-radius: 8px !important;
+    border: 1px solid #d1d5db !important;
+    padding: 0.75rem !important;
+    font-size: 0.875rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.stTextInput input:focus, .stTextArea textarea:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Button Styling */
+.stButton button {
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    padding: 0.5rem 1rem !important;
+    border: none !important;
+    transition: all 0.2s ease !important;
+    font-size: 0.875rem !important;
+}
+
+.stButton button[kind="primary"] {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    color: white !important;
+}
+
+.stButton button[kind="primary"]:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+.stButton button[kind="secondary"] {
+    background: white !important;
+    color: #374151 !important;
+    border: 1px solid #d1d5db !important;
+}
+
+.stButton button[kind="secondary"]:hover {
+    background: #f9fafb !important;
+    border-color: #9ca3af !important;
+}
+
+/* Success/Warning/Error Messages */
+.stSuccess { 
+    border-radius: 8px !important; 
+    border-left: 3px solid #10b981 !important; 
+}
+
+.stWarning { 
+    border-radius: 8px !important; 
+    border-left: 3px solid #f59e0b !important; 
+}
+
+.stError { 
+    border-radius: 8px !important; 
+    border-left: 3px solid #ef4444 !important; 
+}
+
+.stInfo { 
+    border-radius: 8px !important; 
+    border-left: 3px solid #3b82f6 !important; 
+}
+
+/* Dialog Styling */
+.dialog-header { 
+    text-align: center; 
+    margin-bottom: 2rem; 
+}
+
+    /* Ensure dialog/footer column contents align buttons to the same baseline */
+    .stColumns > div {
+        display: flex !important;
+        flex-direction: column !important;
+        min-height: 6.25rem; /* give columns a consistent minimum height */
+    }
+
+    /* Push Streamlit-rendered buttons to the bottom of their column */
+    .stColumns > div .stButton {
+        margin-top: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+        /* Ensure all dialog/footer buttons share the same height and vertical centering */
+        .stColumns > div .stButton button {
+            min-height: 40px !important;
+            height: 40px !important;
+            padding: 0.375rem 0.75rem !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+.dialog-title { 
+    font-size: 1.5rem; 
+    font-weight: 600; 
+    color: #1f2937; 
+    margin-bottom: 0.5rem; 
+}
+
+.dialog-progress {
+    background: #f3f4f6;
+    height: 4px;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.dialog-progress-bar {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* Expander Styling */
+.streamlit-expanderHeader {
+    background: #f8fafc !important;
+    border-radius: 8px !important;
+    border: 1px solid #e5e7eb !important;
+    font-weight: 500 !important;
+}
+
+.streamlit-expanderContent {
+    border: 1px solid #e5e7eb !important;
+    border-top: none !important;
+    border-radius: 0 0 8px 8px !important;
+    background: white !important;
+}
+
+/* Output Section */
+.output-section {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 2rem;
+    min-height: 600px;
+    border: 1px solid #e5e7eb;
+}
+
+/* Output Placeholder */
+.output-placeholder {
+    height: 100%;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #6b7280;
+}
+
+.output-placeholder-inner { 
+    max-width: 420px; 
+}
+
+.output-placeholder-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.output-placeholder-text {
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 0.75rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #6b7280;
+    border-top: 1px solid #e5e7eb;
+    z-index: 1000;
+}
+
+.footer a { 
+    color: #3b82f6; 
+    text-decoration: none; 
+}
+
+.footer a:hover { 
+    text-decoration: underline; 
+}
+
+/* Privacy expander text */
+.privacy-expander small {
+    color: #6b7280;
+}
+
+/* Hide Streamlit branding and reduce spacing */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
