@@ -1,0 +1,9 @@
+Fasse die Antwort kurz und präzise zusammen.
+Regeln:
+- Maximal 2-3 Sätze.
+- Für Abläufe: gib Stichpunkte in korrekter Reihenfolge aus.
+- Keine neuen Informationen hinzufügen.
+
+FRAGE: {question_text}
+ANTWORT: {answer_text}
+ZUSAMMENFASSUNG:

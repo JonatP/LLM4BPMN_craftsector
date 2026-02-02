@@ -1,0 +1,99 @@
+You are an expert in process management, BPMN 2.0 semantics, and BPMN Diagram Interchange (DI).
+
+Task: Review the provided BPMN 2.0 XML model (baseline) and improve it strictly according to the accompanying textual process description, which is the single source of truth. Output only the final improved BPMN 2.0 XML (including BPMN DI).
+
+Inputs:
+
+1. Existing BPMN 2.0 XML model (baseline)
+2. Textual process description (single source of truth)
+
+Hard Constraints:
+
+- Implement only what is described in the textual process description; do not add undocumented business logic.
+- Preserve all existing IDs. Create new IDs only for newly added elements required by the text. Change existing IDs only if strictly necessary to resolve invalid XML/BPMN, duplicate IDs, or broken references.
+- Never use sequenceFlow between pools.
+- Never use messageFlow or message events between lanes (within the same pool).
+
+Validation and Improvements Checklist:
+
+1. BPMN 2.0 Structural & Syntax Validity
+
+- Ensure valid BPMN 2.0 XML structure, correct namespaces, and correct root elements.
+- Ensure valid XML encoding and properly matched opening/closing tags.
+- Ensure all IDs are unique and all references are valid (sourceRef, targetRef, flowNodeRef, dataStoreRef, itemSubjectRef, etc.).
+- Ensure all required elements exist for the chosen modeling style (collaboration vs. single process).
+
+2. Control Flow & Logic Conformance
+
+- The textual description defines the process order and logic; align the baseline model accordingly.
+- Ensure every flow node (except start/end events) has the required incoming/outgoing sequenceFlows.
+- Detect and fix dead ends, unreachable nodes, broken joins, missing sequenceFlows, or invalid gateway usage.
+- Ensure every diverging gateway has a corresponding converging gateway of the same type (XOR with XOR, AND with AND, etc.), unless the text clearly implies otherwise.
+- For every diverging gateway, label all outgoing sequenceFlows with meaningful, human-readable names.
+
+  - Use conditionExpression for conditional routing where applicable (especially XOR/OR); use one default flow if the text implies “otherwise”.
+- Avoid unnecessary gateways and artificial control flow not required by the text.
+
+3. Participants, Pools, and Lanes
+
+- Identify participants from the text and model them as pools (collaboration) only when the text implies inter-participant interaction.
+- Create lanes only if there are ≥2 distinct roles/departments within the same participant.
+
+  - If only one role exists for a participant, do not use laneSet; name the pool with that role.
+  - If baseline contains lanes but the text implies a single role, remove laneSet and assign nodes directly to the process.
+- If lanes exist:
+
+  - Every flowNode must appear in exactly one lane via flowNodeRef.
+  - No flowNode may exist outside lanes.
+  - No flowNode may appear in multiple lanes.
+
+4. Data Modeling (Mandatory)
+
+- Extract and model all data artifacts mentioned explicitly (and only those strongly implied as concrete artifacts/records) in the text:
+  - Documents/Information artifacts → bpmn:DataObject + bpmn:DataObjectReference
+  - Databases/Systems/Repositories (e.g., CRM/ERP/DMS) → bpmn:DataStore + bpmn:DataStoreReference (with dataStoreRef)
+- Connect data elements to activities exclusively via data associations (never via sequenceFlow/messageFlow):
+
+  - If an activity reads/uses data: bpmn:dataInputAssociation (DataObjectReference/DataStoreReference → Activity)
+  - If an activity creates/updates/stores data: bpmn:dataOutputAssociation (Activity → DataObjectReference/DataStoreReference)
+- Add data associations only where the text implies read/write/create/update; do not invent undocumented data usage.
+- For semantic/tool-friendly correctness, add minimal ItemAwareElements on activities involved in data exchange:
+
+  - Preferred: bpmn:property (one or more as needed) so dataInputAssociation/dataOutputAssociation can reference valid targets without tool warnings.
+
+5. Message Semantics (Only if the text describes inter-participant communication)
+
+- Use message throw/catch events and messageFlow only between pools (participants).
+- Do not use messageFlow or message events within a pool or between lanes.
+
+6. BPMN DI Completeness, Layout, and Readability (Mandatory)
+
+- Ensure every BPMN element has a corresponding BPMNShape (including DataObjectReference and DataStoreReference) or BPMNEdge (including sequenceFlows, messageFlows, and all dataInputAssociations/dataOutputAssociations).
+- Enforce a strict left-to-right layout:
+
+  - Start events on the far left; end events on the far right.
+  - Gateways centered in the flow; avoid overlaps.
+- Edge routing quality rules (in priority order):
+
+  1. Edges must not overlap or pass through any shape bounds (activities, events, gateways, pools/lanes, data objects/stores).
+  2. Edges must not intersect or overlap any label bounds (node labels or edge labels).
+  3. Minimize edge crossings; avoid crossings where reasonably possible.
+  4. Keep connectors reasonably short; use bendpoints when needed.
+- Labels and text/edge separation (mandatory):
+
+  - Provide explicit bpmndi:BPMNLabel + dc:Bounds for all named flows (SequenceFlow/MessageFlow/DataAssociation) and for flow nodes where labels are rendered.
+  - No edge may intersect any label bounds; route around labels using bendpoints.
+  - Labels must not overlap any shape bounds.
+- Place DataObjectReferences/DataStoreReferences near their associated activities (typically above or below) while still respecting the no-overlap/no-label-intersection rules.
+
+7. Lane and Pool Bounds (Only if lanes exist)
+
+- First assign coordinates and dimensions to all flow nodes.
+- Compute each lane’s bounds as min/max of contained node bounds plus padding: L=80, R=80, T=30, B=30.
+- Compute the pool’s bounds to contain all lanes plus padding: L=30, R=30, T=20, B=20.
+- Validate that every node shape is fully inside its lane; if not, expand lane/pool bounds (do not move nodes unless strictly required).
+
+Output:
+
+- Only the final improved BPMN 2.0 XML (including BPMN DI), directly importable in bpmn.io and Signavio without warnings or errors.
+- Before finalizing, re-scan the XML and confirm it is parseable (no mismatched or unclosed tags). If not, fix it.

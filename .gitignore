@@ -1,0 +1,14 @@
+assets/external/
+__pycache__/
+.web
+.states
+*.py[cod]
+*.db
+# Environment variables (enthält API Keys!)
+.env
+.env.local
+.env.production
+
+# Virtual environment
+.venv/
+venv/

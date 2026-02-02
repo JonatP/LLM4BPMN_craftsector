@@ -1,0 +1,29 @@
+{
+    "topics": [
+        {
+            "key": "question1",
+            "title": "Prozessbeginn",
+            "content": "Wie beginnt der Prozess typischerweise? Was ist der Auslöser? Was ist der erste Schritt?"
+        },
+        {
+            "key": "question2",
+            "title": "Ablauf",
+            "content": "Wie ist die chronologische Reihenfolge der Prozessschritte? Welche Aktivitäten werden nacheinander ausgeführt? Gibt es parallele Abläufe oder Entscheidungspunkte?"
+        },
+        {
+            "key": "question3",
+            "title": "Prozessende",
+            "content": "Wie endet der Prozess? Was ist das Ergebnis? Gibt es verschiedene Endszenarien (z.B. erfolgreicher Abschluss vs. Abbruch)?"
+        },
+        {
+            "key": "question4",
+            "title": "Beteiligte",
+            "content": "Welche Personen, Rollen oder Abteilungen sind am Prozess beteiligt? Wer ist für welche Schritte verantwortlich? Diese Information ist wichtig für Pools und Lanes im BPMN-Diagramm."
+        },
+        {
+            "key": "question5",
+            "title": "Daten & Systeme",
+            "content": "Welche Daten, Dokumente oder IT-Systeme werden im Prozess verwendet? Wo werden Informationen gespeichert? Dies ist wichtig für Data Objects und Data Stores im BPMN-Diagramm."
+        }
+    ]
+}

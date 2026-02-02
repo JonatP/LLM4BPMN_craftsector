@@ -1,0 +1,89 @@
+You are an expert in process management, BPMN 2.0 semantics, and BPMN Diagram Interchange (DI).
+Task: Convert the following textual process description into a fully compliant BPMN 2.0 XML model by reasoning step by step internally. The final BPMN model should adhere strictly to the BPMN 2.0 standard. Do only output the final BPMN XML.
+Goal: The resulting BPMN XML must be:
+- Fully compliant with the BPMN 2.0 specification
+- Uploadable and correctly renderable in tools such as bpmn.io and Signavio
+- Semantically correct, logically ordered, and visually readable
+Step 1: Process Element Extraction
+- Identify all tasks, events, gateways, and data objects in the text
+Step 2: Participant Extraction
+- Identify all participants as candidates for pools.
+- Identify roles, departments, or responsibilities as lanes within a pool, if applicable.
+- Assign every process element to exactly one pool and, if applicable, exactly one lane.
+Step 3: Define Process Flow
+- Construct the process flow strictly according to the logical and temporal order described in the text.
+- Ensure that: Every diverging gateway has a corresponding converging gateway of the same type
+- Label all outgoing sequence flows from diverging gateways with meaningful, human-readable conditions.
+- Avoid unnecessary gateways or artificial control flow.
+- The resulting process must make business sense when read from left to right.
+Step 4: BPMN XML Construction
+- roduce a syntactically and semantically valid BPMN 2.0 XML model.
+- se correct BPMN elements and attributes only.
+- Do not use placeholders or incomplete definitions.
+- If a laneSet exists:
+    - Every flowNode must appear in exactly one lane via flowNodeRef
+    - No flowNode may exist outside of lanes
+    - No flowNode may appear in multiple lanes
+- If communication between pools exists:
+    - Use message throw and catch events
+    - Use messageFlow between pools only
+- Never use messageFlow or message events between lanes.
+- Escape all special characters according to XML rules.
+Step 5: Complete the BPMN DI (Diagram Interchange) part
+- The diagram must be laid out horizontally:
+    - Start events on the far left
+    - End events on the far right
+    - Flow direction strictly left to right
+- Assign explicit coordinates and dimensions to all BPMNShapes and BPMNEdges.
+- Ensure high diagram readability:
+    - SequenceFlows and MessageFlows must NOT visually overlap or cross over activities, events, or gateways
+    - Route edges with bendpoints if necessary to avoid overlaps
+    - Avoid edge crossings where reasonably possible
+- If lanes are present:
+    - All flowNode shapes must be completely inside their lane’s visual bounds
+    - No shape may overflow above or below its lane
+- Compute lane and pool bounds dynamically:
+    - Lane and pool BPMNShapes must fully contain all assigned flowNodes
+    - Include sufficient padding on all sides
+    - Extend bounds to the rightmost and bottommost contained elements
+- Ensure that:
+    - Every BPMN element has a corresponding BPMNShape or BPMNEdge
+    - No diagram elements are missing
+    - No overlapping shapes occur
+Additional strict Rules:
+- Create lanes only if there are ≥2 roles/departments within the same participant. If only one role exists, do not create any laneSet. Name the pool with that role
+- Assign coordinates to all flow nodes first. Then compute lane bounds as min/max of contained node bounds plus padding (L=80,R=80,T=30,B=30). Then compute pool bounds to contain all lanes plus padding (L=30,R=30,T=20,B=20)
+- Before final XML, validate every node shape is fully inside its lane bounds; if not, expand lane/pool bounds (do not move nodes unless required)
+- Never create a pool + single lane with the same name. Either one pool only, or one pool with ≥2 lanes
+Extension: Data Objects, Databases, and Data Associations:
+Extract explicitly and implicitly mentioned information objects from the text as:
+- bpmn:DataObject + bpmn:DataObjectReference (documents, forms, offers/quotes, orders, lists, logs/minutes)
+- bpmn:DataStore + bpmn:DataStoreReference (databases/IT systems such as CRM, ERP, DMS; “database”, “system”, “repository”)
+Connect data objects/databases to activities exclusively via data associations (dashed arrows):
+- If an activity reads/uses data: bpmn:dataInputAssociation (source = DataObjectReference/DataStoreReference → target = activity)
+- If an activity creates/updates/stores data: bpmn:dataOutputAssociation (source = activity → target = DataObjectReference/DataStoreReference)
+Use NO SequenceFlow/MessageFlow for data object/database connections.
+BPMN XML compliance:
+- For each activity, model the required ItemAwareElements (e.g., bpmn:property or bpmn:dataInput/bpmn:dataOutput) so that dataInputAssociation/dataOutputAssociation can reference them semantically correctly.
+- For databases: define bpmn:dataStore and reference it via bpmn:dataStoreReference (dataStoreRef).
+BPMN DI (mandatory):
+- Create a BPMNEdge for every dataInputAssociation/dataOutputAssociation and prefer short, non-crossing dashed connectorsand use bendpoints. Avoid overlaps. crossing avoidance has priority over proximity.
+- Route edges so they avoid overlapping, use bendpoints and minimize crossings.
+- Place DataObjects/DataStores close to the related activities (e.g., above/below) so dashed edges remain short and avoid crossings.
+- No edge may cross any text label (and labels must not sit on top of edges):
+- Route SequenceFlow / MessageFlow / DataAssociation waypoints so that connectors do not intersect the bounding boxes of any BPMNLabel (activity/event/gateway labels and flow labels).
+- Place labels so that their bounds do not overlap any connector line.
+- If a conflict occurs, prefer rerouting edges with bendpoints
+Extension: Comments / Annotations (Text Annotations) (Mandatory when applicable)
+- If the textual process description contains additional noteworthy details for an activity that are not control-flow relevant (e.g., business rules, constraints, SLAs, timing notes, policies, exceptions, clarifications, tool hints), model them as BPMN comments:
+    - Use bpmn:textAnnotation with concise, human-readable text.
+    - Connect each comment to its related activity using a bpmn:association (not a sequenceFlow or messageFlow).
+    - Do not use comments to introduce new business logic; only capture informational details explicitly present in the text.
+- BPMN DI for comments:
+    - Create a BPMNShape for every textAnnotation and a BPMNEdge for every association connecting it to the activity.
+    - Place textAnnotations near the associated activity (typically to the side) and route association edges with bendpoints to avoid overlapping/crossing shapes and labels.
+    - Association edges must follow the same label-avoidance rule: no connector may intersect any BPMNLabel bounds.
+Naming (strict):
+- Every bpmn:DataObject, bpmn:DataObjectReference, bpmn:DataStore, and bpmn:DataStoreReference MUST have a meaningful, human-readable @name attribute.
+- Names must not be empty, generic (e.g., "DataObject 1"), or placeholders.
+- IDs must be unique and stable (no duplicates).

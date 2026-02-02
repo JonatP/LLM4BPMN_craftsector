@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+    --ink: #0f172a;
+    --muted: #475569;
+    --brand: #0ea5a5;
+    --brand-dark: #0f766e;
+    --accent: #f59e0b;
+    --surface: #ffffff;
+    --surface-muted: #f8fafc;
+    --shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+    --radius-lg: 18px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    font-size: 20px;
+    line-height: 1.6;
+    background: radial-gradient(1200px 800px at 10% -10%, #e0f2fe 0%, transparent 60%),
+                radial-gradient(900px 700px at 90% -20%, #ecfeff 0%, transparent 55%),
+                linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+}
+
+.hero-title {
+    font-size: 2.6rem;
+    font-family: "Fraunces", serif;
+    letter-spacing: 0.5px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    line-height: 1.7;
+}
+
+.glass-panel {
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.bpmn-legend {
+    margin-top: 0.25rem;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.bpmn-legend-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.6rem;
+}
+
+.bpmn-legend-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem 0.8rem;
+}
+
+.bpmn-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: #374151;
+}
+
+.bpmn-icon {
+    width: 2.8rem;
+    height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bpmn-icon-wide {
+    width: 3.5rem;
+}
+
+.bpmn-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.bpmn-start { fill: #DCEBFF; stroke: #2563EB; stroke-width: 3; }
+.bpmn-end { fill: #DCEBFF; stroke: #2563EB; stroke-width: 4; }
+.bpmn-end-outer { fill: none; stroke: #2563EB; stroke-width: 2; }
+.bpmn-task { fill: #ffffff; stroke: #000000; stroke-width: 2; }
+.bpmn-gateway { fill: #ffffff; stroke: #000000; stroke-width: 2.5; }
+.bpmn-gateway-mark { stroke: #000000; stroke-width: 2; }
+.bpmn-intermediate { fill: #ffffff; stroke: #000000; stroke-width: 2; }
+.bpmn-intermediate-inner { fill: none; stroke: #000000; stroke-width: 2; }
+.bpmn-data { fill: #ffffff; stroke: #000000; stroke-width: 2; }
+.bpmn-data-fold { fill: #000000; }
+.bpmn-storage { fill: #ffffff; stroke: #000000; stroke-width: 2; }
+.bpmn-storage-top { fill: #ffffff; stroke: #000000; stroke-width: 2; }
+.bpmn-flow { stroke: #000000; stroke-width: 2; fill: #000000; }
+.bpmn-message { fill: #ffffff; stroke: #000000; stroke-width: 2; }
+
+.info-tab-button {
+    height: 56px;
+    width: 100%;
+    font-weight: 600;
+    line-height: 1;
+    border-radius: 999px;
+    border: 1px solid rgba(12, 128, 98, 0.35);
+    box-shadow: 0 6px 14px rgba(12, 128, 98, 0.18);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform: scale(1);
+}
+
+.info-tab-button[aria-pressed="true"],
+.info-tab-button[data-state="active"],
+.info-tab-button[data-state="on"] {
+    transform: scale(1);
+    box-shadow: 0 6px 14px rgba(12, 128, 98, 0.18);
+    border-width: 1px;
+    margin: 0;
+}
+
+.info-tab-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.sidebar-toggle-btn {
+    background: rgba(255,255,255,0.15) !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+    color: white !important;
+    backdrop-filter: blur(4px);
+}
+
+.sidebar-toggle-btn:hover {
+    background: rgba(255,255,255,0.25) !important;
+}
+
+.sidebar-panel {
+    animation: slideIn 0.2s ease-out;
+}
+
+.sidebar-nav-item {
+    border-radius: 10px !important;
+    font-weight: 500;
+}
+
+.sidebar-nav-item:hover {
+    background: rgba(15, 118, 110, 0.08) !important;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.pulse-animation {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.spin-animation {
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@media (max-width: 1100px) {
+    .info-tab-button {
+        font-size: 0.95rem;
+    }
+    .info-tab-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .hero-row {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+    .page-container {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+    .interview-panel,
+    .summary-panel {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+}
+
+@media (max-width: 720px) {
+    .page-container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    .hero-title {
+        font-size: 2rem;
+    }
+    body {
+        font-size: 16px;
+    }
+    .glass-panel {
+        padding: 1.25rem !important;
+    }
+    .hero-row {
+        padding: 1.25rem 1.5rem !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .info-tab-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    .page-container {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    body {
+        font-size: 15px;
+    }
+    .glass-panel {
+        padding: 1rem !important;
+    }
+    .hero-row {
+        padding: 1rem 1.25rem !important;
+    }
+    .section-title {
+        font-size: 1.35rem;
+    }
+    .section-subtitle {
+        font-size: 1rem;
+    }
+}

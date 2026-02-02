@@ -1,0 +1,5 @@
+You are an expert in process management and BPMN 2.0 modeling.
+The BPMN DI part of the following process BPMN XML is either missing or incomplete.
+Task: Generate the BPMN DI part of the XML file. Output only the XML code for this part.
+Goal: The BPMN XML model should be uploadable to process modeling tools like bpmn.io and signavio.
+Ensure completeness. As information, you get the BPMN XML and a textual description of the process.
